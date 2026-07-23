@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>apna shop · clothes · online store</title>
+  <!-- SEO Meta -->
+  <meta name="description" content="apna shop – trendy, affordable clothing for men, women, and kids. Glassmorphism online store with seamless shopping." />
+  <meta name="keywords" content="clothing, fashion, online store, men, women, kids, apna shop" />
+  <meta name="author" content="apna shop" />
+  <!-- Google Fonts: Poppins + Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+  <!-- Bootstrap 5 + Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <style>
+    :root {
+      --primary: #2a7d6e;
+      --accent: #b8885a;
+      --bg: #ffffff;
+      --text: #1e1e1c;
+      --secondary: #f5f5f3;
+      --glass-bg: rgba(255, 255, 255, 0.25);
+      --glass-border: rgba(255, 255, 255, 0.35);
+      --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.12);
+      --glass-blur: blur(10px);
+      --font-heading: 'Poppins', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, h5, .heading-font { font-family: var(--font-heading); font-weight: 700; letter-spacing: -0.02em; }
+    .accent-color { color: var(--accent); }
+    .primary-color { color: var(--primary); }
+    .bg-soft { background: var(--secondary); }
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      border-radius: 2rem;
+    }
+    .navbar-glass {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.4);
+    }
+    .nav-link { font-weight: 500; color: var(--text) !important; transition: 0.2s; }
+    .nav-link:hover { color: var(--primary) !important; transform: translateY(-1px); }
+    .hero-video {
+      position: relative;
+      height: 90vh;
+      min-height: 480px;
+      overflow: hidden;
+      background: #1e1e1c;
+    }
+    .hero-video video {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 100%; min-height: 100%;
+      object-fit: cover;
+      filter: brightness(0.5) saturate(0.8);
+    }
+    .hero-content {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      color: white;
+    }
+    .hero-content .glass { padding: 2.5rem 3.5rem; background: rgba(0,0,0,0.25); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); }
+    .masonry-grid { column-count: 3; column-gap: 1.5rem; }
+    .masonry-item { break-inside: avoid; margin-bottom: 1.5rem; border-radius: 2rem; overflow: hidden; transition: 0.25s; }
+    .masonry-item img { width: 100%; display: block; border-radius: 2rem; }
+    .masonry-item:hover { transform: scale(1.01); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+    .back-top {
+      position: fixed; bottom: 2rem; right: 2rem;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      font-size: 1.6rem;
+      box-shadow: 0 8px 24px rgba(42,125,110,0.3);
+      transition: 0.2s;
+      z-index: 999;
+    }
+    .back-top:hover { background: var(--accent); transform: scale(1.05); }
+    .counter-number { font-size: 3.2rem; font-weight: 800; font-family: var(--font-heading); color: var(--primary); }
+    .lightbox-trigger { cursor: pointer; transition: 0.2s; }
+    .lightbox-trigger:hover { opacity: 0.85; transform: scale(1.02); }
+    .newsletter-input { background: rgba(255,255,255,0.5); backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.5); border-radius: 100px; padding: 0.8rem 1.5rem; }
+    .newsletter-input:focus { background: rgba(255,255,255,0.8); border-color: var(--primary); box-shadow: 0 0 0 0.2rem rgba(42,125,110,0.2); }
+    .footer-link { color: rgba(30,30,28,0.7); text-decoration: none; transition: 0.15s; }
+    .footer-link:hover { color: var(--primary); text-decoration: underline; }
+    @media (max-width: 992px) { .masonry-grid { column-count: 2; } }
+    @media (max-width: 576px) { .masonry-grid { column-count: 1; } }
+    .fade-section { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .fade-section.visible { opacity: 1; transform: translateY(0); }
+    .section-spacer { padding: 5rem 0; }
+    @media (max-width: 768px) { .section-spacer { padding: 3rem 0; } }
+    .product-card { transition: 0.2s; }
+    .product-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.04); }
+    .cart-badge { position: relative; top: -8px; right: 4px; background: var(--accent); color: white; border-radius: 50%; padding: 0.2rem 0.6rem; font-size: 0.7rem; }
+    .btn-add-cart { transition: 0.15s; }
+  </style>
+</head>
+<body>
+  <!-- Back to top -->
+  <button class="back-top" id="backToTop" aria-label="Back to top"><i class="bi bi-chevron-up"></i></button>
+
+  <!-- ===== NAVIGATION with cart & auth ===== -->
+  <nav class="navbar navbar-expand-lg navbar-glass sticky-top py-2">
+    <div class="container">
+      <a class="navbar-brand mx-auto d-block text-center heading-font fs-2 fw-bold" href="#" style="color: var(--primary);">
+        <i class="bi bi-bag-heart-fill accent-color me-2"></i>apna shop
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-2 gap-lg-3 text-center">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#new">New</a></li>
+          <li class="nav-item"><a class="nav-link" href="#men">Men</a></li>
+          <li class="nav-item"><a class="nav-link" href="#women">Women</a></li>
+          <li class="nav-item"><a class="nav-link" href="#kids">Kids</a></li>
+          <li class="nav-item"><a class="nav-link" href="#offers">Offers</a></li>
+          <li class="nav-item"><a class="nav-link" href="#reviews">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+        <div class="d-flex gap-2 align-items-center">
+          <!-- user status indicator -->
+          <span id="userStatus" class="badge bg-success rounded-pill me-1 d-none">Logged in</span>
+          <a href="#" class="btn btn-outline-primary rounded-pill btn-sm" id="authToggle" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="bi bi-person"></i></a>
+          <a href="#" class="btn btn-outline-primary rounded-pill btn-sm position-relative" data-bs-toggle="modal" data-bs-target="#cartModal">
+            <i class="bi bi-cart3"></i>
+            <span class="cart-badge" id="cartCount">0</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section id="home" class="hero-video">
+    <video autoplay muted loop playsinline>
+      <source src="https://videos.pexels.com/video-files/3195531/3195531-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-content">
+      <div class="glass p-4 p-lg-5">
+        <h1 class="display-4 fw-bold heading-font">apna shop</h1>
+        <p class="lead fs-3 fw-light">clothes · for every story</p>
+        <a href="#new" class="btn btn-light rounded-pill px-5 py-2 mt-3 fw-semibold">Explore collection</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MAIN ===== -->
+  <main class="container section-spacer">
+
+    <!-- NEW ARRIVALS + MASONRY (clothing images) -->
+    <section id="new" class="fade-section mb-5">
+      <h2 class="heading-font display-5 fw-bold"><span class="accent-color">New</span> arrivals</h2>
+      <div class="masonry-grid mt-4">
+        <div class="masonry-item glass p-2"><img src="https://picsum.photos/seed/cloth1/400/500" alt="clothing" class="img-fluid"></div>
+        <div class="masonry-item glass p-2"><img src="https://picsum.photos/seed/cloth2/400/600" alt="clothing"></div>
+        <div class="masonry-item glass p-2"><img src="https://picsum.photos/seed/cloth3/400/400" alt="clothing"></div>
+        <div class="masonry-item glass p-2"><img src="https://picsum.photos/seed/cloth4/400/550" alt="clothing"></div>
+        <div class="masonry-item glass p-2"><img src="https://picsum.photos/seed/cloth5/400/480" alt="clothing"></div>
+        <div class="masonry-item glass p-2"><img src="https://picsum.photos/seed/cloth6/400/520" alt="clothing"></div>
+      </div>
+    </section>
+
+    <!-- COUNTERS -->
+    <section class="fade-section row g-4 my-5 text-center">
+      <div class="col-6 col-md-3"><div class="glass py-4"><span class="counter-number" data-count="1250">0</span><p class="mb-0">Happy customers</p></div></div>
+      <div class="col-6 col-md-3"><div class="glass py-4"><span class="counter-number" data-count="340">0</span><p class="mb-0">Styles</p></div></div>
+      <div class="col-6 col-md-3"><div class="glass py-4"><span class="counter-number" data-count="28">0</span><p class="mb-0">Awards</p></div></div>
+      <div class="col-6 col-md-3"><div class="glass py-4"><span class="counter-number" data-count="4.8">0</span><p class="mb-0">Avg. rating</p></div></div>
+    </section>
+
+    <!-- PRODUCT GRID (with Add to Cart - requires login) -->
+    <section id="men" class="fade-section my-5">
+      <h2 class="heading-font display-5 fw-bold"><span class="accent-color">Men's</span> collection</h2>
+      <div class="row g-4 mt-3">
+        <div class="col-md-4 col-6"><div class="glass p-3 product-card"><img src="https://picsum.photos/seed/men1/400/400" class="img-fluid rounded-4" alt="men"><h5 class="mt-2">Denim Jacket</h5><p class="fw-bold">₹2,499</p><button class="btn btn-sm btn-primary rounded-pill btn-add-cart" data-name="Denim Jacket" data-price="2499">Add to cart</button></div></div>
+        <div class="col-md-4 col-6"><div class="glass p-3 product-card"><img src="https://picsum.photos/seed/men2/400/400" class="img-fluid rounded-4" alt="men"><h5 class="mt-2">Casual Shirt</h5><p class="fw-bold">₹1,299</p><button class="btn btn-sm btn-primary rounded-pill btn-add-cart" data-name="Casual Shirt" data-price="1299">Add to cart</button></div></div>
+        <div class="col-md-4 col-6"><div class="glass p-3 product-card"><img src="https://picsum.photos/seed/men3/400/400" class="img-fluid rounded-4" alt="men"><h5 class="mt-2">Slim Trousers</h5><p class="fw-bold">₹1,999</p><button class="btn btn-sm btn-primary rounded-pill btn-add-cart" data-name="Slim Trousers" data-price="1999">Add to cart</button></div></div>
+      </div>
+    </section>
+
+    <section id="women" class="fade-section my-5">
+      <h2 class="heading-font display-5 fw-bold"><span class="accent-color">Women's</span> collection</h2>
+      <div class="row g-4 mt-3">
+        <div class="col-md-4 col-6"><div class="glass p-3 product-card"><img src="https://picsum.photos/seed/women1/400/400" class="img-fluid rounded-4" alt="women"><h5 class="mt-2">Floral Dress</h5><p class="fw-bold">₹3,199</p><button class="btn btn-sm btn-primary rounded-pill btn-add-cart" data-name="Floral Dress" data-price="3199">Add to cart</button></div></div>
+        <div class="col-md-4 col-6"><div class="glass p-3 product-card"><img src="https://picsum.photos/seed/women2/400/400" class="img-fluid rounded-4" alt="women"><h5 class="mt-2">Silk Top</h5><p class="fw-bold">₹1,899</p><button class="btn btn-sm btn-primary rounded-pill btn-add-cart" data-name="Silk Top" data-price="1899">Add to cart</button></div></div>
+        <div class="col-md-4 col-6"><div class="glass p-3 product-card"><img src="https://picsum.photos/seed/women3/400/400" class="img-fluid rounded-4" alt="women"><h5 class="mt-2">Midi Skirt</h5><p class="fw-bold">₹2,199</p><button class="btn btn-sm btn-primary rounded-pill btn-add-cart" data-name="Midi Skirt" data-price="2199">Add to cart</button></div></div>
+      </div>
+    </section>
+
+    <section id="kids" class="fade-section my-5">
+      <h2 class="heading-font display-5 fw-bold"><span class="accent-color">Kids'</span> collection</h2>
+      <div class="row g-4 mt-3">
+        <div class="col-md-4 col-6"><div class="glass p-3 product-card"><img src="https://picsum.photos/seed/kid1/400/400" class="img-fluid rounded-4" alt="kids"><h5 class="mt-2">Graphic Tee</h5><p class="fw-bold">₹899</p><button class="btn btn-sm btn-primary rounded-pill btn-add-cart" data-name="Graphic Tee" data-price="899">Add to cart</button></div></div>
+        <div class="col-md-4 col-6"><div class="glass p-3 product-card"><img src="https://picsum.photos/seed/kid2/400/400" class="img-fluid rounded-4" alt="kids"><h5 class="mt-2">Dungaree</h5><p class="fw-bold">₹1,499</p><button class="btn btn-sm btn-primary rounded-pill btn-add-cart" data-name="Dungaree" data-price="1499">Add to cart</button></div></div>
+        <div class="col-md-4 col-6"><div class="glass p-3 product-card"><img src="https://picsum.photos/seed/kid3/400/400" class="img-fluid rounded-4" alt="kids"><h5 class="mt-2">Sneakers</h5><p class="fw-bold">₹2,299</p><button class="btn btn-sm btn-primary rounded-pill btn-add-cart" data-name="Sneakers" data-price="2299">Add to cart</button></div></div>
+      </div>
+    </section>
+
+    <!-- BEST SELLERS CAROUSEL -->
+    <section id="offers" class="fade-section my-5">
+      <h2 class="heading-font display-5 fw-bold"><span class="accent-color">Best</span> sellers</h2>
+      <div id="testimonialCarousel" class="carousel slide mt-4" data-bs-ride="carousel">
+        <div class="carousel-inner glass p-4 p-lg-5">
+          <div class="carousel-item active text-center"><img src="https://picsum.photos/seed/best1/300/300" class="rounded-circle mb-3" width="100" alt="product"><h5>Classic Denim Jacket</h5><p class="text-muted">⭐⭐⭐⭐⭐ · 4.9</p></div>
+          <div class="carousel-item text-center"><img src="https://picsum.photos/seed/best2/300/300" class="rounded-circle mb-3" width="100" alt="product"><h5>Floral Summer Dress</h5><p class="text-muted">⭐⭐⭐⭐⭐ · 4.8</p></div>
+          <div class="carousel-item text-center"><img src="https://picsum.photos/seed/best3/300/300" class="rounded-circle mb-3" width="100" alt="product"><h5>Organic Cotton Tee</h5><p class="text-muted">⭐⭐⭐⭐⭐ · 4.9</p></div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon bg-dark rounded-circle p-3"></span></button>
+        <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next"><span class="carousel-control-next-icon bg-dark rounded-circle p-3"></span></button>
+      </div>
+    </section>
+
+    <!-- CATEGORIES + ABOUT -->
+    <section class="fade-section row g-4 my-5">
+      <div class="col-md-4"><div class="glass p-4 text-center"><i class="bi bi-person-arms-up display-4 primary-color"></i><h4>Men</h4><p>Shirts, trousers, suits</p></div></div>
+      <div class="col-md-4"><div class="glass p-4 text-center"><i class="bi bi-person-standing-dress display-4 accent-color"></i><h4>Women</h4><p>Dresses, tops, skirts</p></div></div>
+      <div class="col-md-4"><div class="glass p-4 text-center"><i class="bi bi-person-wheelchair display-4 primary-color"></i><h4>Kids</h4><p>Playful & comfortable</p></div></div>
+    </section>
+
+    <!-- ABOUT + SIZE GUIDE -->
+    <section id="contact" class="fade-section row g-4 my-5">
+      <div class="col-lg-6"><div class="glass p-4"><h3 class="heading-font">About apna shop</h3><p>Welcome to our online clothing store, where fashion meets comfort and quality. We offer a wide collection of trendy, stylish, and affordable clothing for men, women, and kids. From everyday essentials to premium fashion wear, our goal is to help you look your best for every occasion. Shop with confidence and enjoy a seamless, secure, and satisfying online shopping experience.</p></div></div>
+      <div class="col-lg-6"><div class="glass p-4"><h3 class="heading-font">Size guide & FAQ</h3><p><strong>📏 Size:</strong> XS–XXL, see chart in store.</p><p><strong>❓ FAQs:</strong> Free shipping over ₹999 · Easy returns · Secure payment</p><p><i class="bi bi-truck"></i> Track order: <a href="#" class="accent-color">track here</a></p></div></div>
+    </section>
+
+    <!-- REVIEWS (lightbox) -->
+    <section id="reviews" class="fade-section my-5">
+      <h2 class="heading-font display-5 fw-bold">Customer <span class="accent-color">reviews</span></h2>
+      <div class="row g-3 mt-3">
+        <div class="col-4 col-md-2 lightbox-trigger" data-bs-toggle="modal" data-bs-target="#lightboxModal"><img src="https://picsum.photos/seed/r1/200/200" class="img-fluid rounded-4" alt="review"></div>
+        <div class="col-4 col-md-2 lightbox-trigger" data-bs-toggle="modal" data-bs-target="#lightboxModal"><img src="https://picsum.photos/seed/r2/200/200" class="img-fluid rounded-4" alt="review"></div>
+        <div class="col-4 col-md-2 lightbox-trigger" data-bs-toggle="modal" data-bs-target="#lightboxModal"><img src="https://picsum.photos/seed/r3/200/200" class="img-fluid rounded-4" alt="review"></div>
+        <div class="col-4 col-md-2 lightbox-trigger" data-bs-toggle="modal" data-bs-target="#lightboxModal"><img src="https://picsum.photos/seed/r4/200/200" class="img-fluid rounded-4" alt="review"></div>
+        <div class="col-4 col-md-2 lightbox-trigger" data-bs-toggle="modal" data-bs-target="#lightboxModal"><img src="https://picsum.photos/seed/r5/200/200" class="img-fluid rounded-4" alt="review"></div>
+        <div class="col-4 col-md-2 lightbox-trigger" data-bs-toggle="modal" data-bs-target="#lightboxModal"><img src="https://picsum.photos/seed/r6/200/200" class="img-fluid rounded-4" alt="review"></div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="fade-section glass p-5 my-5 text-center">
+      <h3 class="heading-font">Join our <span class="accent-color">newsletter</span></h3>
+      <p>Get 10% off your first order & exclusive updates.</p>
+      <form class="row g-2 justify-content-center">
+        <div class="col-auto"><input type="email" class="form-control newsletter-input" placeholder="Your email" required></div>
+        <div class="col-auto"><button class="btn btn-primary rounded-pill px-5" style="background:var(--primary);border:0;">Subscribe</button></div>
+      </form>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-soft pt-5 pb-4 mt-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4"><h5 class="heading-font">apna shop</h5><p class="small">clothes · Village Pandar, Post Jasra, Prayagraj, Uttar Pradesh – 212107, India</p><p><i class="bi bi-telephone"></i> +91 8299552791</p></div>
+        <div class="col-md-2"><h6>Links</h6><a href="#" class="footer-link d-block">Home</a><a href="#" class="footer-link d-block">New</a><a href="#" class="footer-link d-block">Men</a><a href="#" class="footer-link d-block">Women</a></div>
+        <div class="col-md-2"><h6>About</h6><a href="#" class="footer-link d-block">Our story</a><a href="#" class="footer-link d-block">Size guide</a><a href="#" class="footer-link d-block">FAQs</a></div>
+        <div class="col-md-4"><h6>Follow us</h6><div class="d-flex gap-3 fs-5"><a href="#" class="social-link text-dark"><i class="bi bi-instagram"></i></a><a href="#" class="social-link text-dark"><i class="bi bi-facebook"></i></a><a href="#" class="social-link text-dark"><i class="bi bi-youtube"></i></a><a href="#" class="social-link text-dark"><i class="bi bi-twitter-x"></i></a></div></div>
+      </div>
+      <hr class="mt-4"><p class="text-center small text-muted">© 2026 apna shop · all rights reserved</p>
+    </div>
+  </footer>
+
+  <!-- ===== MODALS ===== -->
+  <!-- Login / Register Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered"><div class="modal-content glass p-4">
+      <h4 class="heading-font">Welcome back</h4>
+      <input type="text" class="form-control my-2" placeholder="Email / Username" id="loginEmail">
+      <input type="password" class="form-control my-2" placeholder="Password" id="loginPassword">
+      <button class="btn btn-primary rounded-pill w-100" style="background:var(--primary);border:0;" id="loginBtn">Login</button>
+      <hr><p class="text-center">New user? <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal">Register</a></p>
+    </div></div>
+  </div>
+  <!-- Register Modal -->
+  <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered"><div class="modal-content glass p-4">
+      <h4 class="heading-font">Create account</h4>
+      <input type="text" class="form-control my-2" placeholder="Full name" id="regName">
+      <input type="email" class="form-control my-2" placeholder="Email" id="regEmail">
+      <input type="password" class="form-control my-2" placeholder="Password" id="regPassword">
+      <button class="btn btn-primary rounded-pill w-100" style="background:var(--primary);border:0;" id="registerBtn">Register</button>
+    </div></div>
+  </div>
+
+  <!-- Shopping Cart Modal -->
+  <div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content glass p-4">
+      <h4 class="heading-font"><i class="bi bi-cart3"></i> Your Cart</h4>
+      <div id="cartItems" class="my-3"><p class="text-muted">Cart is empty</p></div>
+      <hr><div class="d-flex justify-content-between"><span class="fw-bold">Total:</span><span id="cartTotal" class="fw-bold">₹0</span></div>
+      <button class="btn btn-success rounded-pill w-100 mt-3" id="checkoutBtn" style="background:var(--primary);border:0;">Proceed to Checkout</button>
+    </div></div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="modal fade" id="lightboxModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content glass"><div class="modal-body p-0"><img src="https://picsum.photos/seed/light/800/600" class="img-fluid w-100 rounded-4" alt="lightbox"></div></div></div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    (function() {
+      // --- AUTH STATE ---
+      let isLoggedIn = false;
+
+      // DOM refs
+      const userStatus = document.getElementById('userStatus');
+      const authToggle = document.getElementById('authToggle');
+
+      // --- LOGIN / REGISTER handlers ---
+      document.getElementById('loginBtn').addEventListener('click', function() {
+        // simple simulation: any non-empty credentials
+        const email = document.getElementById('loginEmail').value.trim();
+        const pass = document.getElementById('loginPassword').value.trim();
+        if (email && pass) {
+          isLoggedIn = true;
+          updateAuthUI();
+          bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
+          alert('Logged in successfully!');
+        } else {
+          alert('Please enter email and password.');
+        }
+      });
+
+      document.getElementById('registerBtn').addEventListener('click', function() {
+        const name = document.getElementById('regName').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const pass = document.getElementById('regPassword').value.trim();
+        if (name && email && pass) {
+          isLoggedIn = true;
+          updateAuthUI();
+          bootstrap.Modal.getInstance(document.getElementById('registerModal')).hide();
+          alert('Registration successful! You are now logged in.');
+        } else {
+          alert('Please fill all fields.');
+        }
+      });
+
+      function updateAuthUI() {
+        if (isLoggedIn) {
+          userStatus.classList.remove('d-none');
+          authToggle.innerHTML = '<i class="bi bi-person-check"></i>';
+          // enable all add-to-cart buttons
+          document.querySelectorAll('.btn-add-cart').forEach(btn => {
+            btn.disabled = false;
+            btn.classList.remove('btn-secondary');
+            btn.classList.add('btn-primary');
+            btn.textContent = 'Add to cart';
+          });
+        } else {
+          userStatus.classList.add('d-none');
+          authToggle.innerHTML = '<i class="bi bi-person"></i>';
+          document.querySelectorAll('.btn-add-cart').forEach(btn => {
+            btn.disabled = true;
+            btn.classList.remove('btn-primary');
+            btn.classList.add('btn-secondary');
+            btn.textContent = 'Login to add';
+          });
+        }
+      }
+
+      // initially disable all add-to-cart buttons
+      document.querySelectorAll('.btn-add-cart').forEach(btn => {
+        btn.disabled = true;
+        btn.classList.add('btn-secondary');
+        btn.classList.remove('btn-primary');
+        btn.textContent = 'Login to add';
+      });
+
+      // --- CART state ---
+      let cart = [];
+
+      function updateCartUI() {
+        const countEl = document.getElementById('cartCount');
+        const itemsEl = document.getElementById('cartItems');
+        const totalEl = document.getElementById('cartTotal');
+        const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+        countEl.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+        totalEl.textContent = `₹${total}`;
+        if (cart.length === 0) {
+          itemsEl.innerHTML = '<p class="text-muted">Cart is empty</p>';
+        } else {
+          itemsEl.innerHTML = cart.map(item => `<div class="d-flex justify-content-between border-bottom py-2"><span>${item.name} x${item.qty}</span><span>₹${item.price * item.qty}</span></div>`).join('');
+        }
+      }
+
+      // Add to cart (only if logged in)
+      document.querySelectorAll('.btn-add-cart').forEach(btn => {
+        btn.addEventListener('click', function() {
+          if (!isLoggedIn) {
+            alert('Please login or register first.');
+            return;
+          }
+          const name = this.dataset.name;
+          const price = parseInt(this.dataset.price);
+          const existing = cart.find(item => item.name === name);
+          if (existing) existing.qty += 1;
+          else cart.push({ name, price, qty: 1 });
+          updateCartUI();
+          this.textContent = 'Added!';
+          setTimeout(() => { if (isLoggedIn) this.textContent = 'Add to cart'; }, 800);
+        });
+      });
+
+      // Checkout
+      document.getElementById('checkoutBtn').addEventListener('click', function() {
+        if (!isLoggedIn) { alert('Please login first.'); return; }
+        if (cart.length === 0) { alert('Cart is empty!'); return; }
+        alert('Order placed successfully! (simulated)');
+        cart = [];
+        updateCartUI();
+        bootstrap.Modal.getInstance(document.getElementById('cartModal')).hide();
+      });
+
+      // --- Back to top ---
+      document.getElementById('backToTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      // --- Scroll fade ---
+      const faders = document.querySelectorAll('.fade-section');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+      }, { threshold: 0.15 });
+      faders.forEach(el => observer.observe(el));
+
+      // --- Counters ---
+      const counters = document.querySelectorAll('.counter-number');
+      const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = parseFloat(el.dataset.count);
+            let current = 0;
+            const increment = target / 70;
+            const timer = setInterval(() => {
+              current += increment;
+              if (current >= target) { el.innerText = target; clearInterval(timer); }
+              else el.innerText = Math.floor(current);
+            }, 20);
+            counterObserver.unobserve(el);
+          }
+        });
+      }, { threshold: 0.4 });
+      counters.forEach(el => counterObserver.observe(el));
+
+      // --- Lightbox update ---
+      document.querySelectorAll('.lightbox-trigger').forEach(img => {
+        img.addEventListener('click', function() {
+          const src = this.querySelector('img').getAttribute('src');
+          document.querySelector('#lightboxModal .modal-body img').setAttribute('src', src);
+        });
+      });
+
+      // --- Smooth scroll nav ---
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+
+      // --- Parallax hero ---
+      window.addEventListener('scroll', function() {
+        const hero = document.querySelector('.hero-video');
+        if (hero) hero.style.transform = `translateY(${window.scrollY * 0.04}px)`;
+      });
+
+      // init: ensure buttons are disabled
+      updateAuthUI();
+    })();
+  </script>
+</body>
+</html>
